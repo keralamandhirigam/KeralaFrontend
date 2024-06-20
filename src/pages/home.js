@@ -2,9 +2,7 @@ import React from 'react';
 import { Avatar,  Flex, Layout, Menu, theme } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import styles from './home.module.scss';
-import toast from 'react-hot-toast';
 import { Outlet } from 'react-router-dom';
-import Title from 'antd/es/typography/Title';
 const { Header, Content, Footer, Sider } = Layout;
 const items = [
     {
@@ -59,7 +57,6 @@ const Home = () => {
                 >
                    
                     <Flex vertical align="flex-end" justify="space-between" className={styles.Avatar}>
-
                         <Avatar style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} />
                     </Flex>
                 </Header>
