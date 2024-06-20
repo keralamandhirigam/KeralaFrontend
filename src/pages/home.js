@@ -59,7 +59,6 @@ const Home = () => {
                 >
                    
                     <Flex vertical align="flex-end" justify="space-between" className={styles.Avatar}>
-
                         <Avatar style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} />
                     </Flex>
                 </Header>
