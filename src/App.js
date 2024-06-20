@@ -1,4 +1,5 @@
 import './App.css';
+import { About } from './pages/about';
 import { CreateForm } from './pages/createForm';
 import Error from './pages/error';
 import Home from './pages/home';
@@ -14,9 +15,9 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path="/" element={<Login />} />
-      <Route path="/dashboard" element={<Home />} >
-      <Route path="create" element={<CreateForm />} />
-
+      <Route path="/home" element={<Home />} >
+        <Route path="form" element={<CreateForm />} />
+        <Route path="about" element={<About />} />
       </Route>
       <Route path="*" element={<Error />} />
     </>

@@ -12,7 +12,7 @@ const Login = () => {
 
     const handleOnFinish = (values) => {
         toast.error("Api not Init");
-        navigate('/dashboard')
+        navigate('/dashboard/create')
     };
     return (
         <div className={styles.loginWrapper}>

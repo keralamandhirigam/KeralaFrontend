@@ -1,28 +1,32 @@
 import React from 'react';
-import { Avatar,  Flex, Layout, Menu, theme } from 'antd';
+import { Avatar, Flex, Layout, Menu, Typography, theme } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import styles from './home.module.scss';
-import { Outlet } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
+const { Text } = Typography;
 const { Header, Content, Footer, Sider } = Layout;
-const items = [
+const Items = [
     {
         key: 1,
-        label: 'Home'
+        name: 'Home',
+        link: 'home'
     },
     {
         key: 2,
-        label: 'Create Data'
+        name: 'Create Data',
+        link: 'form'
     },
     {
         key: 3,
-        label: 'Home'
+        name: 'About',
+        link: 'about'
     },
 
 ]
 const Home = () => {
-    
 
-   
+
+
 
     const {
         token: { colorBgContainer, borderRadiusLG },
@@ -46,7 +50,16 @@ const Home = () => {
                 }}
             >
                 <div className="demo-logo-vertical" />
-                <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']} items={items} />
+                <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
+                    {Items.map(item => (
+                        <Menu.Item key={item.key} onClick={()=>console.log(item.name)}>
+                            <Link to={`/home/${item.link}`}>
+                            {item.name}
+                            </Link>
+                        </Menu.Item>
+                    ))}
+                </Menu>
+
             </Sider>
             <Layout>
                 <Header
@@ -55,7 +68,7 @@ const Home = () => {
                         background: colorBgContainer,
                     }}
                 >
-                   
+
                     <Flex vertical align="flex-end" justify="space-between" className={styles.Avatar}>
                         <Avatar style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} />
                     </Flex>
