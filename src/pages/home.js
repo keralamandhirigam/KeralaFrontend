@@ -8,8 +8,8 @@ const { Header, Content, Footer, Sider } = Layout;
 const Items = [
     {
         key: 1,
-        name: 'Home',
-        link: 'home'
+        name: 'Datas',
+        link: 'data'
     },
     {
         key: 2,
@@ -25,18 +25,10 @@ const Items = [
 ]
 const Home = () => {
 
-
-
-
     const {
         token: { colorBgContainer, borderRadiusLG },
     } = theme.useToken();
-    // ==========================================================================================================
-
-
-    // ==========================================================================================================
-
-
+ 
     return (
         <Layout>
             <Sider

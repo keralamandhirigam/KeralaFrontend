@@ -2,52 +2,28 @@ import { Avatar, Button, Card, Divider, Form, Input, InputNumber, Select, Space,
 import PhoneInput from 'antd-phone-input';
 import Meta from 'antd/es/card/Meta';
 import TextArea from 'antd/es/input/TextArea';
-import { City, Country, State } from 'country-state-city';
-import React, { useEffect, useId, useState } from 'react'
+import { City, State } from 'country-state-city';
+import React, { useEffect, useState } from 'react'
 import toast, { Toaster } from 'react-hot-toast';
 import { Payment_Mode } from './constant';
 import styles from './home.module.scss';
-import nextId from 'react-id-generator';
 const { Text } = Typography;
 export const CreateForm = () => {
     const [currentRecord, setCurrentRecord] = useState();
 
-    const [countries, setCountries] = useState([]);
     const [states, setStates] = useState([]);
     const [cities, setCities] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
-    const [selectedCountry, setSelectedCountry] = useState('');
-    const [selectedState, setSelectedState] = useState('');
+    // const [isLoading, setIsLoading] = useState(false);
+    const [selectedState, setSelectedState] = useState('TN');
     const [selectedCity, setSelectedCity] = useState('');
 
 
-    useEffect(() => {
-        const getCountries = async () => {
-            try {
-                setIsLoading(true);
-                const result = await Country.getAllCountries();
-                let allCountries = [];
-                allCountries = result?.map(({ isoCode, name }) => ({
-                    isoCode,
-                    name
-                }));
-                const [{ isoCode: firstCountry } = {}] = allCountries;
-                setCountries(allCountries);
-                setSelectedCountry(`IN`);
-                setIsLoading(false);
-            } catch (error) {
-                setCountries([]);
-                setIsLoading(false);
-            }
-        };
-
-        getCountries();
-    }, []);
+ 
 
     useEffect(() => {
         const getStates = async () => {
             try {
-                const result = await State.getStatesOfCountry(selectedCountry);
+                const result = await State.getStatesOfCountry('IN');
                 let allStates = [];
                 allStates = result?.map(({ isoCode, name }) => ({
                     isoCode,
@@ -66,13 +42,13 @@ export const CreateForm = () => {
         };
 
         getStates();
-    }, [selectedCountry]);
+    }, []);
 
     useEffect(() => {
         const getCities = async () => {
             try {
                 const result = await City.getCitiesOfState(
-                    selectedCountry,
+                    'IN',
                     selectedState
                 );
                 let allCities = [];
@@ -81,7 +57,7 @@ export const CreateForm = () => {
                 }));
                 const [{ name: firstCity = '' } = {}] = allCities;
                 setCities(allCities);
-                setSelectedCity('TN');
+                setSelectedCity();
             } catch (error) {
                 setCities([]);
             }
@@ -155,25 +131,7 @@ export const CreateForm = () => {
                         label="Whatsapp Number :"
                         name="whatNumber"
                     >
-                        <PhoneInput  defaultCountry="IN"  countries={['IN']} enableSearch onChange={(e)=>console.log(e)}/>
-                    </Form.Item>
-                    <Form.Item
-                        label="Country :"
-                        name="country"
-                    >
-                        <Select
-                            showSearch
-                            placeholder="Select Countrie"
-                            defaultValue="IN"
-                            filterOption={(input, option) =>
-                                (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
-                            }
-                            onChange={(event) => setSelectedCountry(event)}
-                            options={countries?.map((count) => ({
-                                label: count?.name,
-                                value: count?.isoCode
-                            }))}
-                        />
+                    <Input type='number' addonBefore="+91" onChange={(e) => console.log(e)} />
                     </Form.Item>
                     <Form.Item
                         label="State :"

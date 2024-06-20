@@ -1,6 +1,7 @@
 import './App.css';
 import { About } from './pages/about';
 import { CreateForm } from './pages/createForm';
+import DataTable from './pages/data';
 import Error from './pages/error';
 import Home from './pages/home';
 import Login from './pages/login';
@@ -18,6 +19,7 @@ const router = createBrowserRouter(
       <Route path="/home" element={<Home />} >
         <Route path="form" element={<CreateForm />} />
         <Route path="about" element={<About />} />
+        <Route path="data" element={<DataTable />} />
       </Route>
       <Route path="*" element={<Error />} />
     </>
