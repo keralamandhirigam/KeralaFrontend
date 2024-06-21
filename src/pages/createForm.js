@@ -1,5 +1,4 @@
 import { Avatar, Button, Card, Divider, Form, Input, InputNumber, Select, Space, Typography } from 'antd';
-import PhoneInput from 'antd-phone-input';
 import Meta from 'antd/es/card/Meta';
 import TextArea from 'antd/es/input/TextArea';
 import { City, State } from 'country-state-city';

@@ -1,5 +1,9 @@
-import React from 'react';
-import { Table } from 'antd';
+import React, { useState } from 'react';
+import { Button, Flex, Form, Modal, Space, Table } from 'antd';
+import Search from 'antd/es/input/Search';
+import styles from './data.module.scss'
+import { EditOutlined } from '@ant-design/icons';
+import Crud from './crud';
 const columns = [
   {
     title: 'Full Name',
@@ -52,11 +56,11 @@ const columns = [
     width: 150,
   },
   {
-    title: 'Action',
+    title: '',
     key: 'operation',
     fixed: 'right',
-    width: 100,
-    render: () => <a>action</a>,
+    width: 35,
+    render: () => <div className={styles.TableIconHover} onClick={() => console.log('heloo')}><EditOutlined /></div>,
   },
 ];
 const data = [];
@@ -68,14 +72,44 @@ for (let i = 0; i < 100; i++) {
     address: `London Park no. ${i}`,
   });
 }
-const DataTable = () => (
-  <Table
-    columns={columns}
-    dataSource={data}
-    scroll={{
-      x: 1500,
-      y: 300,
-    }}
-  />
-);
+const DataTable = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [form] = Form.useForm()
+
+  const handleSubmit =(values)=>{
+    console.log(values);
+  }
+
+  return (
+    <div>
+      <Flex justify='end' className={styles.Avatar}>
+        <Space>
+          <Search
+            placeholder="Search"
+            allowClear
+            enterButton="Search"
+            className={styles.search}
+            onSearch={(e) => console.log(e)}
+            onChange={(e) => console.log(e.target.value)}
+          />
+          <Button type="primary" onClick={()=>setIsModalOpen(true)}>Create</Button>
+        </Space>
+      </Flex>
+      <Table
+        columns={columns}
+        dataSource={data}
+        scroll={{
+          x: 1500,
+          y: 300,
+        }}
+      />
+
+
+      <Modal title="Basic Modal" open={isModalOpen} onOk={() => form.submit()} onCancel={() => setIsModalOpen(!isModalOpen)}>
+       <Crud onSubmit={handleSubmit} form={form}/>
+      </Modal>
+
+    </div>
+  )
+}
 export default DataTable;

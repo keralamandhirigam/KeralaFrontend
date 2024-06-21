@@ -30,7 +30,7 @@ const Home = () => {
     } = theme.useToken();
  
     return (
-        <Layout>
+        <Layout style={{ minHeight: "100vh" }}>
             <Sider
                 breakpoint="lg"
                 collapsedWidth="0"
@@ -73,7 +73,7 @@ const Home = () => {
                     <div
                         style={{
                             padding: 24,
-                            // minHeight: `80vh`,
+                            // minHeight: `85vh`,
                             background: colorBgContainer,
                             borderRadius: borderRadiusLG,
                         }}

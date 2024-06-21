@@ -1,7 +1,6 @@
 import './App.css';
 import { About } from './pages/about';
 import { CreateForm } from './pages/createForm';
-import DataTable from './pages/data';
 import Error from './pages/error';
 import Home from './pages/home';
 import Login from './pages/login';
@@ -11,6 +10,7 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
+import { ViewContent } from './pages/view';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -19,7 +19,7 @@ const router = createBrowserRouter(
       <Route path="/home" element={<Home />} >
         <Route path="form" element={<CreateForm />} />
         <Route path="about" element={<About />} />
-        <Route path="data" element={<DataTable />} />
+        <Route path="data" element={<ViewContent />} />
       </Route>
       <Route path="*" element={<Error />} />
     </>

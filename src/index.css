@@ -33,3 +33,18 @@ code {
   display: none;
 }
 
+.ant-table,
+.ant-table-container,
+.ant-table-body,
+.ant-table-wrapper {
+  min-height: 60vh;
+}
+
+.ant-table-thead .ant-table-cell {
+  background-color: rgb(130, 216, 130) !important;
+}
+
+.ant-table-tbody > tr:hover > td {
+  background-color: cadetblue;
+  color: #8f8888;
+}
