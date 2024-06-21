@@ -1,20 +1,22 @@
-import { Form, Input, Select } from 'antd'
+import { Avatar, Form, Input, InputNumber, Select, Typography } from 'antd'
 import FormBuilder from 'antd-form-builder'
 import { City, State } from 'country-state-city';
 import React, { useCallback, useEffect, useState } from 'react'
-
+import { Payment_Mode } from './constant';
 const Crud = ({ form, handleFinish }) => {
+    const forceUpdate = FormBuilder.useForceUpdate();
     const [states, setStates] = useState([]);
     const [cities, setCities] = useState([]);
     // const [isLoading, setIsLoading] = useState(false);
-    const [selectedState, setSelectedState] = useState('TN');
+    const [selectedState, setSelectedState] = useState('');
     const [selectedCity, setSelectedCity] = useState('');
 
-    const handleSubmit = useCallback(values => {
+    const { Text } = Typography;
+
+    const handleCrudSubmit = (values => {
         handleFinish(values);
         console.log(values);
     });
-
     useEffect(() => {
         const getStates = async () => {
             try {
@@ -24,15 +26,14 @@ const Crud = ({ form, handleFinish }) => {
                     isoCode,
                     name
                 }));
-                const [{ isoCode: firstState = '' } = {}] = allStates;
+                const [{ isoCode: firstState = 'Tamil nadu' } = {}] = allStates;
                 setCities([]);
-                setSelectedCity('');
                 setStates(allStates);
                 setSelectedState(`TN`);
+                setSelectedCity('');
             } catch (error) {
                 setStates([]);
                 setCities([]);
-                setSelectedCity('');
             }
         };
 
@@ -61,41 +62,109 @@ const Crud = ({ form, handleFinish }) => {
         getCities();
     }, [selectedState]);
 
-    const StateWidget = () => {
-       return (
-        <Select
-        showSearch
-        placeholder="Select State"
-        defaultValue="TN"
-        filterOption={(input, option) =>
-            (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
-        }
-        onChange={(event) => setSelectedState(event)}
-        options={states?.map((stat) => ({
-            label: stat?.name,
-            value: stat?.isoCode
-        }))}
-    />
-       )
-    }
-    const CityWidget = () => {
-       return (
-        <Select
-        showSearch
-        placeholder="Select City"
-        filterOption={(input, option) =>
-            (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
-        }
-        onChange={(event) => setSelectedCity(event)}
-        options={cities?.map((cit) => ({
-            label: cit?.name,
-            value: cit?.name
-        }))}
-    />
-       )
+    const StateWidget = ({ value, onChange }) => {
+        return (
+            <Select
+                value={value}
+                showSearch
+                placeholder="Select State"
+                filterOption={(input, option) =>
+                    (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+                }
+                onChange={(value) => { setSelectedState(value); onChange(value) }}
+                options={states?.map((stat) => ({
+                    label: stat?.name,
+                    value: stat?.isoCode
+                }))}
+            />
+        );
+    };
+
+    const CityWidget = ({ value, onChange }) => {
+        return (
+            <Select
+                value={value}
+                showSearch
+                placeholder="Select City"
+                filterOption={(input, option) =>
+                    (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+                }
+                onChange={(event) => { setSelectedCity(event); onChange(event) }}
+                options={cities?.map((cit) => ({
+                    label: cit?.name,
+                    value: cit?.name
+                }))}
+            />
+        )
     }
 
 
+    const PayMode = ({ value, onChange }) => {
+        return (
+            <Select
+                value={value}
+                showSearch
+                placeholder="Select a Payment mode"
+                filterOption={(input, option) =>
+                    (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+                }
+                onChange={(event) => onChange(event)}
+                options={Payment_Mode}
+                optionRender={(option) => (
+
+                    <div>
+                        <Avatar size={25} icon={option?.data?.icon} />
+                        <Text>{option?.data?.label}</Text>
+                    </div>
+
+                )}
+            />
+        )
+    }
+
+    // const BalanceWidget = ({ value, onChange }) => {
+    //     return (
+    //         <Input
+    //             value={value}
+    //             placeholder="Enter Amount"
+    //             type='number'
+    //             prefix='₹'
+    //             onChange={(event) => { console.log(event.target.value); onChange(event.target.value) }}
+    //         />
+    //     );
+    // };
+    const TotalAmountWidget = ({ value, onChange }) => {
+        const handleInputChange = (inputValue) => {
+            const parsedValue = parseFloat(inputValue.replace(/₹\s?|(,*)/g, ''));
+            onChange(parsedValue);
+            console.log(parsedValue);
+        };
+
+        return (
+            <InputNumber 
+                value={value}
+                formatter={value => `₹ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                parser={value => value.replace(/^₹\s?|(,*)/g, '')}
+                onBlur={(e) => handleInputChange(e.target.value)}
+            />
+        );
+    };
+    const BalanceWidget = ({ value, onChange }) => {
+        const handleInputChange = (inputValue) => {
+            const parsedValue = parseFloat(inputValue.replace(/₹\s?|(,*)/g, ''));
+            onChange(parsedValue);
+            console.log(parsedValue);
+        };
+
+        return (
+            <InputNumber 
+                value={value}
+                formatter={value => `₹ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                parser={value => value.replace(/^₹\s?|(,*)/g, '')}
+                onBlur={(e) => handleInputChange(e.target.value)}
+            />
+        );
+    };
 
 
     const meta = {
@@ -106,18 +175,22 @@ const Crud = ({ form, handleFinish }) => {
         fields: [
             { key: 'name', label: 'Name', colSpan: 2 },
             { key: 'whatNumber', label: 'Whatsapp Number', type: 'number', colSpan: 2 },
-            { key: 'state', label: 'State', colSpan: 2, widget: StateWidget, forwardRef: true},
-            { key: 'city', label: 'City', colSpan: 2, widget: CityWidget, forwardRef: true},
+            { key: 'state', label: 'State', colSpan: 2, widget: StateWidget },
+            { key: 'city', label: 'City', colSpan: 2, widget: CityWidget, forwardRef: true },
             { key: 'address', label: 'Address', widget: 'textarea', colSpan: 2 },
+            { key: 'remark', label: 'Remark', widget: 'textarea', colSpan: 4 },
+            { key: 'paymentMode', label: 'Payment Mode', widget: PayMode, colSpan: 2 },
+            { key: 'total', label: 'Total Amount', widget: TotalAmountWidget, colSpan: 2, forwardRef: true },
+            { key: 'balance', label: 'Balance', widget: BalanceWidget, colSpan: 2, forwardRef: true },
         ],
     }
 
 
 
     return (
-        <Form layout="vertical" onSubmit={handleSubmit} form={form} >
+        <Form form={form} layout="vertical" onFinish={handleCrudSubmit} onSubmit={handleCrudSubmit} onValuesChange={forceUpdate}>
             <FormBuilder meta={meta} form={form} />
-        </Form>
+       </Form>
     )
 }
 
