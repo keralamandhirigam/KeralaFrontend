@@ -48,3 +48,9 @@ code {
   background-color: cadetblue;
   color: #8f8888;
 }
+
+input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }

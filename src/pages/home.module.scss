@@ -9,15 +9,11 @@
     justify-content: center;
     align-items: center;
     height:85vh;
-    // filter: blur(8px);
-    
-    input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
+    background-image: url('https://images.unsplash.com/photo-1589983846997-04788035bc83?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    background-position: center;
+    // background: linear-gradient(90deg, rgba(2, 0, 36, 0.555) 0%, rgba(9, 9, 121, 0.473) 35%, rgba(0, 213, 255, 0.473) 100%);
     form{
-      width: 470px,
+      max-width: 470px,
     }
   }
 

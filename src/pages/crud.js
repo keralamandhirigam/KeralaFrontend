@@ -3,11 +3,12 @@ import FormBuilder from 'antd-form-builder'
 import { City, State } from 'country-state-city';
 import React, { useCallback, useEffect, useState } from 'react'
 import { Payment_Mode } from './constant';
-const Crud = ({ form, handleFinish }) => {
+const Crud = ({ form, handleFinish, initialValues }) => {
+
+
     const forceUpdate = FormBuilder.useForceUpdate();
     const [states, setStates] = useState([]);
     const [cities, setCities] = useState([]);
-    // const [isLoading, setIsLoading] = useState(false);
     const [selectedState, setSelectedState] = useState('');
     const [selectedCity, setSelectedCity] = useState('');
 
@@ -26,7 +27,7 @@ const Crud = ({ form, handleFinish }) => {
                     isoCode,
                     name
                 }));
-                const [{ isoCode: firstState = 'Tamil nadu' } = {}] = allStates;
+                const [{ isoCode: firstState = '' } = {}] = allStates;
                 setCities([]);
                 setStates(allStates);
                 setSelectedState(`TN`);
@@ -170,19 +171,20 @@ const Crud = ({ form, handleFinish }) => {
     const meta = {
         columns: 4,
         formItemLayout: null,
-        // initialValues,
+        initialValues,
         colon: true,
         fields: [
             { key: 'name', label: 'Name', colSpan: 2 },
-            { key: 'whatNumber', label: 'Whatsapp Number', type: 'number', colSpan: 2 },
+            { key: 'whatNumber', label: 'Whatsapp Number', type: 'number', colSpan: 2},
             { key: 'state', label: 'State', colSpan: 2, widget: StateWidget },
             { key: 'city', label: 'City', colSpan: 2, widget: CityWidget, forwardRef: true },
             { key: 'address', label: 'Address', widget: 'textarea', colSpan: 2 },
-            { key: 'remark', label: 'Remark', widget: 'textarea', colSpan: 4 },
             { key: 'paymentMode', label: 'Payment Mode', widget: PayMode, colSpan: 2 },
-            { key: 'total', label: 'Total Amount', widget: TotalAmountWidget, colSpan: 2, forwardRef: true },
-            { key: 'balance', label: 'Balance', widget: BalanceWidget, colSpan: 2, forwardRef: true },
-        ],
+            { key: 'total', label: 'Total Amount', widget: TotalAmountWidget, colSpan: 1.3, forwardRef: true },
+            { key: 'paid', label: 'Paid', widget: BalanceWidget, colSpan: 1.3, forwardRef: true },
+            { key: 'balance', label: 'Balance', widget: BalanceWidget, colSpan: 1.3, forwardRef: true },
+            { key: 'remark', label: 'Remark', widget: 'textarea', colSpan: 4 },
+        ]
     }
 
 

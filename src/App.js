@@ -1,6 +1,5 @@
 import './App.css';
 import { About } from './pages/about';
-import { CreateForm } from './pages/createForm';
 import Error from './pages/error';
 import Home from './pages/home';
 import Login from './pages/login';
@@ -11,6 +10,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { ViewContent } from './pages/view';
+import { CreateForm } from './pages/forms/createForm';
 
 const router = createBrowserRouter(
   createRoutesFromElements(

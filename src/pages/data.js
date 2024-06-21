@@ -107,7 +107,7 @@ const DataTable = () => {
 
 
       <Modal title="Basic Modal" open={isModalOpen} onOk={() => {form.submit();}} onCancel={() => {setIsModalOpen(!isModalOpen); form.resetFields()}}>
-       <Crud handleFinish={handleSubmit} form={form}/>
+       <Crud initialValues={console} handleFinish={handleSubmit} form={form}/>
       </Modal>
 
     </div>
