@@ -12,14 +12,14 @@ const Login = () => {
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate()
 
-    useEffect(() => {
-        const fetchData = async () => {
-            fetch('https://deploy-mern-api.vercel.app/register')
-            .then(res => res.json())
-            .then((e)=>{console.log(e)});
-        }
-        fetchData();
-      });
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         fetch('https://deploy-mern-api.vercel.app/register')
+    //         .then(res => res.json())
+    //         .then((e)=>{console.log(e)});
+    //     }
+    //     fetchData();
+    //   });
     
 
     const handleOnFinish = (values) => {

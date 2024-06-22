@@ -1,74 +1,99 @@
-import React, { useState } from 'react';
-import { Button, Flex, Form, Modal, Space, Table } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { Divider, Flex, Form, Modal, Space, Table } from 'antd';
 import Search from 'antd/es/input/Search';
 import styles from './data.module.scss'
 import { EditOutlined } from '@ant-design/icons';
 import Crud from './crud';
+import { sampleData } from './constant';
 
-const data = [];
-for (let i = 0; i < 100; i++) {
-  data.push({
-    key: i,
-    name: `Edward ${i}`,
-    age: 32,
-    address: `London Park no. ${i}`,
-  });
-}
+
 const DataTable = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [form] = Form.useForm()
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [currentRecord, setCurrentRecord] = useState();
+  const [userList, setUserList] = useState();
+  const [form] = Form.useForm();
+  useEffect(() => {
+    getData();
+  },[])
 
-  const handleSubmit =(values)=>{
-    console.log(values);
+
+
+
+  const getData = () => {
+    setUserList(sampleData)
   }
+
+  const handleSubmit = (values) => {
+    console.log(values);
+    form.resetFields();
+  }
+
+
+  // const handleCancel = (values) => {
+
+  //   values.resetFields();
+  //   console.log(values.resetFields());
+  //   setCurrentRecord();
+  //   setModalOpen(false);
+  //   // form.resetFields();
+  // }
+  const handleCancel = (form) => {
+    setCurrentRecord();
+    console.log('Modal canceled');
+    form.resetFields(); 
+  };
+ 
+ 
 
   const columns = [
     {
-      title: 'Full Name',
+      title: 'Client Id',
+      width: 70,
+      dataIndex: 'clientId',
+      key: 'clientId',
+      fixed: 'left',
+    },
+    {
+      title: 'Name',
       width: 100,
       dataIndex: 'name',
       key: 'name',
       fixed: 'left',
     },
+
     {
-      title: 'Age',
+      title: 'Total Amount',
+      dataIndex: 'totalAmount',
+      key: 'totalAmount',
       width: 100,
-      dataIndex: 'age',
-      key: 'age',
-      fixed: 'left',
     },
     {
-      title: 'Column 1',
-      dataIndex: 'address',
-      key: '1',
+      title: 'Amount Paid',
+      dataIndex: 'amountPaid',
+      key: 'amountPaid',
+      width: 100,
+    },
+    {
+      title: 'Balance Due',
+      dataIndex: 'balanceDue',
+      key: 'balanceDue',
+      width: 100,
+    },
+    {
+      title: 'Remark',
+      dataIndex: 'remark',
+      key: 'remark',
+      width: 150,
+      // render: (row) => <div>{row?.name}</div>,
+    },
+    {
+      title: 'City',
+      dataIndex: 'city',
+      key: 'city',
       width: 150,
     },
     {
-      title: 'Column 2',
-      dataIndex: 'address',
-      key: '2',
-      width: 150,
-    },
-    {
-      title: 'Column 3',
-      dataIndex: 'address',
-      key: '3',
-      width: 150,
-    },
-    {
-      title: 'Column 4',
-      dataIndex: 'address',
-      key: '4',
-      width: 150,
-    },
-    {
-      title: 'Column 5',
-      dataIndex: 'address',
-      key: '5',
-      width: 150,
-    },
-    {
-      title: 'Column 6',
+      title: 'Address',
       dataIndex: 'address',
       key: '6',
       width: 150,
@@ -78,7 +103,7 @@ const DataTable = () => {
       key: 'operation',
       fixed: 'right',
       width: 35,
-      render: () => <div className={styles.TableIconHover} onClick={() => setIsModalOpen(true)}><EditOutlined /></div>,
+      render: (row) => <div className={styles.TableIconHover} onClick={(e) => { setModalOpen(true); setCurrentRecord(row); }}><EditOutlined /></div>,
     },
   ];
   return (
@@ -88,26 +113,34 @@ const DataTable = () => {
           <Search
             placeholder="Search"
             allowClear
-            enterButton="Search"
+            enterButton
             className={styles.search}
             onSearch={(e) => console.log(e)}
             onChange={(e) => console.log(e.target.value)}
+
           />
-          {/* <Button type="primary" onClick={()=>setIsModalOpen(true)}>Create</Button> */}
         </Space>
       </Flex>
       <Table
+        rowKey='clientId'
         columns={columns}
-        dataSource={data}
+        dataSource={userList}
         scroll={{
           x: 1500,
           y: 300,
         }}
       />
 
-
-      <Modal title="Basic Modal" open={isModalOpen} onOk={() => {form.submit();}} onCancel={() => {setIsModalOpen(!isModalOpen); form.resetFields()}}>
-       <Crud initialValues={console} handleFinish={handleSubmit} form={form}/>
+      <Modal
+        title={`Update ${currentRecord?.name} Details`}
+        open={isModalOpen}
+        centered
+        okText="Update"
+        // maskClosable={false}
+        onOk={()=> setModalOpen(false)}
+        onCancel={ () => handleCancel(form)}>
+        <Divider />
+        <Crud initialValues={currentRecord} handleFinish={handleSubmit} form={form} />
       </Modal>
 
     </div>

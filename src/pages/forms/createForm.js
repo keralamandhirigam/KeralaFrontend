@@ -1,4 +1,4 @@
-import { Button, Card, Form } from 'antd';
+import { Button, Card, Form, Space } from 'antd';
 import React, { useState } from 'react'
 import toast, { Toaster } from 'react-hot-toast';
 import styles from '../home.module.scss';
@@ -16,13 +16,18 @@ export const CreateForm = () => {
 
         console.log(values);
         toast.success("Data created");
+        form.resetFields();
     };
     return (
         <div className={`${styles.Wrapper} ${styles.blur}`}>
-            {/* <Toaster /> */}
+            <Toaster />
             <Card>
                 <Crud handleFinish={handleSubmit} form={form} />
+                <Space>
+
                 <Button type="primary" onClick={() => { form.submit() }}>Submit</Button>
+                <Button type="" onClick={() => { form.resetFields() }}>Clear</Button>
+                </Space>
             </Card>
         </div>
     )
