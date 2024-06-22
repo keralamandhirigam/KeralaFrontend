@@ -47,18 +47,21 @@ const DataTable = () => {
       dataIndex: 'totalAmount',
       key: 'totalAmount',
       width: 100,
+      render: (row) => <Text>₹ {row}</Text>
     },
     {
       title: 'Amount Paid',
       dataIndex: 'amountPaid',
       key: 'amountPaid',
       width: 100,
+      render: (row) => <Text>₹ {row}</Text>
     },
     {
       title: 'Balance Due',
       dataIndex: 'balanceDue',
       key: 'balanceDue',
       width: 100,
+      render: (row) => <Text>₹ {row}</Text>
     },
     {
       title: 'Remark',
