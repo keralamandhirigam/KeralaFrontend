@@ -54,3 +54,7 @@ input::-webkit-outer-spin-button,
       -webkit-appearance: none;
       margin: 0;
     }
+
+    .ant-input-number-input{
+      width: 100% !important;
+    }

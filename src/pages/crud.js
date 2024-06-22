@@ -1,4 +1,4 @@
-import { Avatar, Form, Input, InputNumber, Select, Typography } from 'antd'
+import { Avatar, Form, Grid, Input, InputNumber, Select, Tag, Typography } from 'antd'
 import FormBuilder from 'antd-form-builder'
 import { City, State } from 'country-state-city';
 import React, { useEffect, useState } from 'react'
@@ -10,15 +10,15 @@ const Crud = ({ form, handleFinish, initialValues }) => {
     const [selectedState, setSelectedState] = useState('');
     const [selectedCity, setSelectedCity] = useState('');
     const { Text } = Typography;
+    const { useBreakpoint } = Grid;
+    const screens = useBreakpoint();
 
-
-
+console.log(screens);
 
     useEffect(() => {
         form.resetFields();
-        console.log('run')
-    },[initialValues])
-    
+    }, [initialValues])
+
 
 
     const handleCrudSubmit = (values => {
@@ -138,6 +138,7 @@ const Crud = ({ form, handleFinish, initialValues }) => {
         return (
             <InputNumber
                 value={value}
+                style={{width: `900px`}}
                 formatter={value => `₹ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                 parser={value => value.replace(/^₹\s?|(,*)/g, '')}
                 onBlur={(e) => handleInputChange(e.target.value)}
@@ -165,23 +166,27 @@ const Crud = ({ form, handleFinish, initialValues }) => {
             </>
         );
     };
-
+    const formItemLayout = {
+        labelCol: { xs: { colSpan: 4 }, sm: { colSpan: 4 }, md: { colSpan: 4 }, lg: { colSpan: 4} },
+        wrapperCol: { xs: { colSpan: 4}, sm: { colSpan: 4}, md: { colSpan: 4 }, lg: { colSpan: 4 } }
+      };
 
     const meta = {
+       
         columns: 4,
-        formItemLayout: null,
+        formItemLayout: formItemLayout,
         initialValues,
         colon: true,
         fields: [
-            { key: 'name', label: 'Name', colSpan: 2 },
-            { key: 'phoneNumber', label: 'Whatsapp Number', type: 'number', colSpan: 2 },
-            { key: 'state', label: 'State', colSpan: 2, widget: StateWidget },
-            { key: 'city', label: 'City', colSpan: 2, widget: CityWidget, forwardRef: true },
-            { key: 'address', label: 'Address', widget: 'textarea', colSpan: 2 },
-            { key: 'paymentMode', label: 'Payment Mode', widget: PayMode, colSpan: 2 },
-            { key: 'totalAmount', label: 'Total Amount', widget: TotalAmountWidget, colSpan: 1.3, forwardRef: true },
-            { key: 'amountPaid', label: 'Paid', widget: BalanceWidget, colSpan: 1.3, forwardRef: true },
-            { key: 'balanceDue', label: 'Balance', widget: BalanceWidget, colSpan: 1.3, forwardRef: true },
+            { key: 'name', label: 'Name', colSpan: `${ screens?.xs && 4 || screens?.xl && 2 || screens?.sm && 2}` },
+            { key: 'phoneNumber', label: 'Whatsapp Number', type: 'number', colSpan: `${ screens?.xs && 4 || screens?.xl && 2 || screens?.sm && 2}` },
+            { key: 'state', label: 'State', widget: StateWidget, colSpan: `${ screens?.xs && 4 || screens?.xl && 2 || screens?.sm && 2}` },
+            { key: 'city', label: 'City', widget: CityWidget, forwardRef: true, colSpan: `${ screens?.xs && 4 || screens?.xl && 2 || screens?.sm && 2}` },
+            { key: 'address', label: 'Address', widget: 'textarea', colSpan: `${ screens?.xs && 4 || screens?.xl && 2 || screens?.sm && 2}` },
+            { key: 'paymentMode', label: 'Payment Mode', widget: PayMode, colSpan: `${ screens?.xs && 4 || screens?.xl && 2 || screens?.sm && 2}`},
+            { key: 'totalAmount', label: 'Total Amount', widget: TotalAmountWidget, forwardRef: true , colSpan: `${ screens?.xs && 4 || screens?.xl && 2|| screens?.sm && 2}`},
+            { key: 'amountPaid', label: 'Paid', widget: BalanceWidget, forwardRef: true, colSpan: `${ screens?.xs && 4 || screens?.xl && 2 || screens?.sm && 2}`},
+            { key: 'balanceDue', label: 'Balance', widget: BalanceWidget, forwardRef: true, colSpan: `${ screens?.xs && 4 || screens?.xl && 1.3 || screens?.sm && 2}`}, 
             { key: 'remark', label: 'Remark', widget: 'textarea', colSpan: 4 },
         ]
     }

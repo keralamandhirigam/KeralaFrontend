@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { Divider, Flex, Form, Modal, Space, Table } from 'antd';
+import { Divider, Flex, Form, Modal, Space, Table, Tooltip, Typography } from 'antd';
 import Search from 'antd/es/input/Search';
 import styles from './data.module.scss'
 import { EditOutlined } from '@ant-design/icons';
 import Crud from './crud';
 import { sampleData } from './constant';
+import Sider from 'antd/es/layout/Sider';
 
 const DataTable = () => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [currentRecord, setCurrentRecord] = useState();
   const [userList, setUserList] = useState();
   const [form] = Form.useForm();
+  const { Text } = Typography;
   useEffect(() => {
     getData();
   },[])
@@ -37,7 +39,7 @@ const DataTable = () => {
       width: 100,
       dataIndex: 'name',
       key: 'name',
-      fixed: 'left',
+      // fixed: 'left',
     },
 
     {
@@ -63,7 +65,7 @@ const DataTable = () => {
       dataIndex: 'remark',
       key: 'remark',
       width: 150,
-      // render: (row) => <div>{row?.name}</div>,
+      render: (row) =>  <Tooltip title={row}><Text>{row}</Text></Tooltip>,
     },
     {
       title: 'City',

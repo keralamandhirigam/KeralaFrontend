@@ -32,10 +32,10 @@ const Home = () => {
     return (
         <Layout style={{ minHeight: "100vh" }}>
             <Sider
-                breakpoint="lg"
+                breakpoint="md"
                 collapsedWidth="0"
                 onBreakpoint={(broken) => {
-                    console.log(broken);
+                    console.log('broken',broken);
                 }}
                 onCollapse={(collapsed, type) => {
                     console.log(collapsed, type);
