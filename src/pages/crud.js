@@ -4,15 +4,22 @@ import { City, State } from 'country-state-city';
 import React, { useEffect, useState } from 'react'
 import { Payment_Mode } from './constant';
 const Crud = ({ form, handleFinish, initialValues }) => {
-
-
     const forceUpdate = FormBuilder.useForceUpdate();
     const [states, setStates] = useState([]);
     const [cities, setCities] = useState([]);
     const [selectedState, setSelectedState] = useState('');
     const [selectedCity, setSelectedCity] = useState('');
-
     const { Text } = Typography;
+
+
+
+
+    useEffect(() => {
+        form.resetFields();
+        console.log('run')
+    },[initialValues])
+    
+
 
     const handleCrudSubmit = (values => {
         handleFinish(values);

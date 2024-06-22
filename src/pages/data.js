@@ -6,7 +6,6 @@ import { EditOutlined } from '@ant-design/icons';
 import Crud from './crud';
 import { sampleData } from './constant';
 
-
 const DataTable = () => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [currentRecord, setCurrentRecord] = useState();
@@ -16,33 +15,13 @@ const DataTable = () => {
     getData();
   },[])
 
-
-
-
   const getData = () => {
     setUserList(sampleData)
   }
 
   const handleSubmit = (values) => {
-    console.log(values);
     form.resetFields();
   }
-
-
-  // const handleCancel = (values) => {
-
-  //   values.resetFields();
-  //   console.log(values.resetFields());
-  //   setCurrentRecord();
-  //   setModalOpen(false);
-  //   // form.resetFields();
-  // }
-  const handleCancel = (form) => {
-    setCurrentRecord();
-    console.log('Modal canceled');
-    form.resetFields(); 
-  };
- 
  
 
   const columns = [
@@ -103,7 +82,7 @@ const DataTable = () => {
       key: 'operation',
       fixed: 'right',
       width: 35,
-      render: (row) => <div className={styles.TableIconHover} onClick={(e) => { setModalOpen(true); setCurrentRecord(row); }}><EditOutlined /></div>,
+      render: (row) => <div className={styles.TableIconHover} onClick={(e) => { setModalOpen(!isModalOpen); setCurrentRecord(row); form.resetFields(); }}><EditOutlined /></div>,
     },
   ];
   return (
@@ -136,9 +115,9 @@ const DataTable = () => {
         open={isModalOpen}
         centered
         okText="Update"
-        // maskClosable={false}
-        onOk={()=> setModalOpen(false)}
-        onCancel={ () => handleCancel(form)}>
+        maskClosable={false}
+        onOk={()=>{setCurrentRecord(); form.submit(); setModalOpen(!isModalOpen); }}
+        onCancel={ () => {setCurrentRecord(); form.resetFields(); setModalOpen(false);}}>
         <Divider />
         <Crud initialValues={currentRecord} handleFinish={handleSubmit} form={form} />
       </Modal>
