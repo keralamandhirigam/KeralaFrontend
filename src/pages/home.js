@@ -1,9 +1,11 @@
 import React from 'react';
-import { Avatar, ConfigProvider, Flex, Layout, Menu, Typography, theme } from 'antd';
+import { Avatar, ConfigProvider, Flex, Grid, Layout, Menu, Typography, theme } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import styles from './home.module.scss';
 import { Link, Outlet } from 'react-router-dom';
 import CustomeTheme from '../theme'
+const { useBreakpoint } = Grid;
+
 const { Header, Content, Footer, Sider } = Layout;
 const Items = [
     {
@@ -24,7 +26,7 @@ const Items = [
 
 ]
 const Home = () => {
-
+    const screens = useBreakpoint();
     const {
         token: { colorBgContainer, borderRadiusLG },
     } = theme.useToken();
@@ -34,6 +36,7 @@ const Home = () => {
             <Layout style={{ minHeight: "100vh" }} >
 
                 <Sider
+                style={{ zIndex: 1 }}
                     theme='light'
                     breakpoint="md"
                     collapsedWidth="0"
@@ -70,12 +73,12 @@ const Home = () => {
                     </Header>
                     <Content
                         style={{
-                            margin: '24px 16px 0',
+                            margin: screens?.xs === !true ? '24px 16px 0' : undefined,
                         }}
                     >
                         <div
                             style={{
-                                padding: 24,
+                                padding: screens?.xs === true && 5 || screens?.sm === true && 12 || screens?.md === true && 18 || screens?.xl === true && 24,
                                 // minHeight: `85vh`,
                                 background: colorBgContainer,
                                 borderRadius: borderRadiusLG,

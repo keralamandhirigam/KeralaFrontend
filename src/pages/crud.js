@@ -158,7 +158,6 @@ console.log(screens);
 
                 <InputNumber
                     value={value}
-
                     formatter={value => `₹ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                     parser={value => value.replace(/^₹\s?|(,*)/g, '')}
                     onBlur={(e) => handleInputChange(e.target.value)}
@@ -166,15 +165,15 @@ console.log(screens);
             </>
         );
     };
-    const formItemLayout = {
-        labelCol: { xs: { colSpan: 4 }, sm: { colSpan: 4 }, md: { colSpan: 4 }, lg: { colSpan: 4} },
-        wrapperCol: { xs: { colSpan: 4}, sm: { colSpan: 4}, md: { colSpan: 4 }, lg: { colSpan: 4 } }
-      };
+    // const formItemLayout = {
+    //     labelCol: { xs: { colSpan: 4 }, sm: { colSpan: 4 }, md: { colSpan: 4 }, lg: { colSpan: 4} },
+    //     wrapperCol: { xs: { colSpan: 4}, sm: { colSpan: 4}, md: { colSpan: 4 }, lg: { colSpan: 4 } }
+    //   };
 
     const meta = {
        
         columns: 4,
-        formItemLayout: formItemLayout,
+        formItemLayout: null,
         initialValues,
         colon: true,
         fields: [
