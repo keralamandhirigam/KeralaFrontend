@@ -22,14 +22,13 @@ const Login = () => {
 
     const handleOnFinish = (values) => {
 
-        if (values?.username && values?.password) {
+        if (values?.username === `Admin` && values?.password=== `Admin@123`) {
             toast.success("Logged in successfully");
-            // sessionStorage.setItem("isUserLogged", true);
-            Cookies.set('isUserLogged', true, { expires: 7 });
+            Cookies.set('isUserLogged', true, { expires: 1 });
             navigate('/home')
         } else {
             navigate('/login')
-            Cookies.set('isUserLogged', false, { expires: 7 });
+            Cookies.set('isUserLogged', false, { expires: 1 });
             toast.error("User name or password incorrect");
         }
     };
