@@ -2,12 +2,11 @@ import { Button, Card, Col, Divider, Form, Input, Row, Space } from 'antd'
 import Meta from 'antd/es/card/Meta'
 import React, { useEffect, useState } from 'react'
 import Cookies from 'js-cookie';
-import ReactCaptcha from 'modern-react-captcha';
 import toast, { Toaster } from 'react-hot-toast';
 import { useNavigate } from "react-router-dom";
 import styles from './login.module.scss'
 import Title from 'antd/es/typography/Title';
-import { GPaySVG } from '../packages/icons/gpay';
+import { ReloadOutlined } from '@ant-design/icons';
 const Login = () => {
     const [captcha, setCaptcha] = useState();
     const [data, setData] = useState(null);
@@ -30,6 +29,7 @@ const Login = () => {
             navigate('/home')
         } else {
             navigate('/login')
+            Cookies.set('isUserLogged', false, { expires: 7 });
             toast.error("User name or password incorrect");
         }
     };
@@ -97,7 +97,7 @@ const Login = () => {
                             <Col span={12} offset={10}>
                                 <span className={styles.captcha}>{captcha}</span>
                                 <span className={styles.captchaResetIcon} onClick={generateRandomNumber} >
-                                    <GPaySVG width={20} height={20} />
+                                <ReloadOutlined />
                                 </span>
                             </Col>
                         </Row>

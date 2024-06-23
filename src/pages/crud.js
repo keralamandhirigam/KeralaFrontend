@@ -159,10 +159,6 @@ const Crud = ({ form, handleFinish, initialValues }) => {
             </>
         );
     };
-    // const formItemLayout = {
-    //     labelCol: { xs: { colSpan: 4 }, sm: { colSpan: 4 }, md: { colSpan: 4 }, lg: { colSpan: 4} },
-    //     wrapperCol: { xs: { colSpan: 4}, sm: { colSpan: 4}, md: { colSpan: 4 }, lg: { colSpan: 4 } }
-    //   };
 
     const meta = {
        
