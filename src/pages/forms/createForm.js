@@ -1,4 +1,4 @@
-import { Button, Card, Col, Divider, Form, Grid, Modal, Row, Space } from 'antd';
+import { Button, Card, Col, Form, Grid, Row, Space } from 'antd';
 import React, { useState } from 'react'
 import toast, { Toaster } from 'react-hot-toast';
 import styles from '../home.module.scss';

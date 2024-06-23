@@ -5,7 +5,6 @@ import styles from './data.module.scss'
 import { EditOutlined } from '@ant-design/icons';
 import Crud from './crud';
 import { sampleData } from './constant';
-import Sider from 'antd/es/layout/Sider';
 
 const DataTable = () => {
   const [isModalOpen, setModalOpen] = useState(false);

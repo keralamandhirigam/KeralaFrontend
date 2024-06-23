@@ -9,11 +9,7 @@ import Title from 'antd/es/typography/Title';
 import { ReloadOutlined } from '@ant-design/icons';
 const Login = () => {
     const [captcha, setCaptcha] = useState();
-    const [data, setData] = useState(null);
-    const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
-
-
 
     useEffect(() => {
         generateRandomNumber();

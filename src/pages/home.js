@@ -1,6 +1,5 @@
 import React from 'react';
-import Cookies from 'js-cookie';
-import { Avatar, Col, ConfigProvider, Flex, Grid, Layout, Menu, Row, Typography, theme } from 'antd';
+import { Avatar, ConfigProvider, Flex, Grid, Layout, Menu, Typography, theme } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import styles from './home.module.scss';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
