@@ -36,7 +36,7 @@ const Home = () => {
 
 
     const handleLogout = () => {
-        Cookies.remove('isUserLogged');
+        localStorage.clear('isUserLogged');
         navigate('/login')
     }
 
