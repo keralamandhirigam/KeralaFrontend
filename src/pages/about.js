@@ -1,7 +1,13 @@
+import { Typography } from 'antd';
 import React from 'react'
 
 export const About = () => {
+  const { Text } = Typography;
   return (
-    <div>about</div>
+    <div>
+      <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ante eros, porta non lectus quis, ultricies laoreet orci. Quisque condimentum, lorem eu ultricies consequat, massa dolor sollicitudin mi, at rhoncus nunc libero ut mauris. Aliquam nec velit nec augue hendrerit varius ut maximus mauris. Aenean sed fringilla tellus. Etiam nisl mi, semper nec fringilla sed, maximus vitae nunc. Sed semper iaculis justo, eget sagittis est congue id. Vivamus dolor tellus, volutpat eget pellentesque ut, dapibus eget nunc. Nulla a feugiat dui, sed interdum enim. Nulla non ligula vitae enim dictum volutpat nec a lectus. Duis ac ante eu est dictum pulvinar ac ac nunc. Nam quis vestibulum risus. Vestibulum imperdiet sed metus nec pretium. Proin vel convallis neque, at porttitor odio. Donec non nulla orci.</Text>
+      <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ante eros, porta non lectus quis, ultricies laoreet orci. Quisque condimentum, lorem eu ultricies consequat, massa dolor sollicitudin mi, at rhoncus nunc libero ut mauris. Aliquam nec velit nec augue hendrerit varius ut maximus mauris. Aenean sed fringilla tellus. Etiam nisl mi, semper nec fringilla sed, maximus vitae nunc. Sed semper iaculis justo, eget sagittis est congue id. Vivamus dolor tellus, volutpat eget pellentesque ut, dapibus eget nunc. Nulla a feugiat dui, sed interdum enim. Nulla non ligula vitae enim dictum volutpat nec a lectus. Duis ac ante eu est dictum pulvinar ac ac nunc. Nam quis vestibulum risus. Vestibulum imperdiet sed metus nec pretium. Proin vel convallis neque, at porttitor odio. Donec non nulla orci.</Text>
+      <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ante eros, porta non lectus quis, ultricies laoreet orci. Quisque condimentum, lorem eu ultricies consequat, massa dolor sollicitudin mi, at rhoncus nunc libero ut mauris. Aliquam nec velit nec augue hendrerit varius ut maximus mauris. Aenean sed fringilla tellus. Etiam nisl mi, semper nec fringilla sed, maximus vitae nunc. Sed semper iaculis justo, eget sagittis est congue id. Vivamus dolor tellus, volutpat eget pellentesque ut, dapibus eget nunc. Nulla a feugiat dui, sed interdum enim. Nulla non ligula vitae enim dictum volutpat nec a lectus. Duis ac ante eu est dictum pulvinar ac ac nunc. Nam quis vestibulum risus. Vestibulum imperdiet sed metus nec pretium. Proin vel convallis neque, at porttitor odio. Donec non nulla orci.</Text>
+    </div>
   )
 }
