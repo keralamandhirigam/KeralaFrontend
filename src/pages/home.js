@@ -1,17 +1,17 @@
 import React from 'react';
+import Cookies from 'js-cookie';
 import { Avatar, ConfigProvider, Flex, Grid, Layout, Menu, Typography, theme } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import styles from './home.module.scss';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import CustomeTheme from '../theme'
 const { useBreakpoint } = Grid;
-
 const { Header, Content, Footer, Sider } = Layout;
 const Items = [
     {
         key: 1,
         name: 'Datas',
-        link: 'data'
+        link: 'home'
     },
     {
         key: 2,
@@ -23,20 +23,30 @@ const Items = [
         name: 'About',
         link: 'about'
     },
-
+    
 ]
 const Home = () => {
+    const navigate = useNavigate()
     const screens = useBreakpoint();
     const {
         token: { colorBgContainer, borderRadiusLG },
     } = theme.useToken();
+
+
+
+    const handleLogout = ()=>{
+        Cookies.remove('isUserLogged');
+        navigate('/login')
+    }
+
+
 
     return (
         <ConfigProvider theme={CustomeTheme}>
             <Layout style={{ minHeight: "100vh" }} >
 
                 <Sider
-                style={{ zIndex: 1 }}
+                    style={{ zIndex: 1 }}
                     theme='light'
                     breakpoint="md"
                     collapsedWidth="0"
@@ -51,11 +61,15 @@ const Home = () => {
                     <Menu theme='light' mode="inline" defaultSelectedKeys={['1']}>
                         {Items.map(item => (
                             <Menu.Item key={item.key}>
-                                <Link to={`/home/${item.link}`}>
+                                <Link to={`${item.link}`}>
                                     {item.name}
                                 </Link>
                             </Menu.Item>
                         ))}
+
+                        <Menu.Item key={4} onClick={handleLogout}>
+                                LogOut
+                            </Menu.Item>
                     </Menu>
 
                 </Sider>

@@ -13,13 +13,9 @@ const Crud = ({ form, handleFinish, initialValues }) => {
     const { useBreakpoint } = Grid;
     const screens = useBreakpoint();
 
-console.log(screens);
-
     useEffect(() => {
         form.resetFields();
     }, [initialValues])
-
-
 
     const handleCrudSubmit = (values => {
         handleFinish(values);
