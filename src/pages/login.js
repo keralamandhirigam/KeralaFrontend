@@ -27,9 +27,9 @@ const Login = () => {
             Cookies.set('isUserLogged', true, { expires: 1 });
             navigate('/home')
         } else {
-            navigate('/login')
-            Cookies.set('isUserLogged', false, { expires: 1 });
             toast.error("User name or password incorrect");
+            Cookies.set('isUserLogged', false, { expires: 1 });
+            navigate('/login')
         }
     };
 

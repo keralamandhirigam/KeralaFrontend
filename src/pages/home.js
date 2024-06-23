@@ -1,11 +1,12 @@
 import React from 'react';
 import Cookies from 'js-cookie';
-import { Avatar, ConfigProvider, Flex, Grid, Layout, Menu, Typography, theme } from 'antd';
+import { Avatar, Col, ConfigProvider, Flex, Grid, Layout, Menu, Row, Typography, theme } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import styles from './home.module.scss';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import CustomeTheme from '../theme'
 const { useBreakpoint } = Grid;
+const { Text } = Typography;
 const { Header, Content, Footer, Sider } = Layout;
 const Items = [
     {
@@ -23,7 +24,7 @@ const Items = [
         name: 'About',
         link: 'about'
     },
-    
+
 ]
 const Home = () => {
     const navigate = useNavigate()
@@ -34,7 +35,7 @@ const Home = () => {
 
 
 
-    const handleLogout = ()=>{
+    const handleLogout = () => {
         Cookies.remove('isUserLogged');
         navigate('/login')
     }
@@ -57,7 +58,8 @@ const Home = () => {
                 //     console.log(collapsed, type);
                 // }}
                 >
-                    <div className="demo-logo-vertical" />
+                    <div className="logo-vertical" >
+                    </div>
                     <Menu theme='light' mode="inline" defaultSelectedKeys={['1']}>
                         {Items.map(item => (
                             <Menu.Item key={item.key}>
@@ -68,8 +70,8 @@ const Home = () => {
                         ))}
 
                         <Menu.Item key={4} onClick={handleLogout}>
-                                LogOut
-                            </Menu.Item>
+                            LogOut
+                        </Menu.Item>
                     </Menu>
 
                 </Sider>
@@ -81,8 +83,11 @@ const Home = () => {
                         }}
                     >
 
-                        <Flex vertical align="flex-end" justify="space-between" className={styles.Avatar}>
+
+                        <Flex justify='flex-start' align='flex-end' className={styles.logoContainer}>
                             <Avatar style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} />
+
+                            <Text className={styles.textContainer}>Kerala</Text>
                         </Flex>
                     </Header>
                     <Content
