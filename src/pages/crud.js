@@ -128,7 +128,6 @@ const Crud = ({ form, handleFinish, initialValues }) => {
         const handleInputChange = (inputValue) => {
             const parsedValue = parseFloat(inputValue.replace(/₹\s?|(,*)/g, ''));
             onChange(parsedValue);
-            console.log(parsedValue);
         };
 
         return (
@@ -146,7 +145,6 @@ const Crud = ({ form, handleFinish, initialValues }) => {
         const handleInputChange = (inputValue) => {
             const parsedValue = parseFloat(inputValue.replace(/₹\s?|(,*)/g, ''));
             onChange(parsedValue);
-            console.log(parsedValue);
         };
 
         return (

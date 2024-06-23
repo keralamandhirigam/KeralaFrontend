@@ -5,7 +5,6 @@ import Home from './pages/home';
 import Login from './pages/login';
 import {
   createBrowserRouter,
-  createRoutesFromChildren,
   createRoutesFromElements,
   Navigate,
   Route,

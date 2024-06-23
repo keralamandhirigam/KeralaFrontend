@@ -69,3 +69,23 @@ input::-webkit-outer-spin-button,
 .ant-menu-item-selected{
 color: black !important;
 }
+
+.modern-react-captcha{
+  display: flex;
+  margin-bottom: 20px;
+
+}
+
+.modern-react-captcha__reloadBtn{
+  border: none;
+  background-color: #fff !important;
+  
+}
+
+.modern-react-captcha__inputField{
+  font-size: large;
+  padding: 5px;
+  border-radius: 5px;
+  outline: none !important;
+  border: 1px solid hsla(0, 0%, 50%, 0.308);
+}

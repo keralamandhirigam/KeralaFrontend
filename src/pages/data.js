@@ -99,8 +99,8 @@ const DataTable = () => {
             allowClear
             enterButton
             className={styles.search}
-            onSearch={(e) => console.log(e)}
-            onChange={(e) => console.log(e.target.value)}
+            // onSearch={(e) => console.log(e)}
+            // onChange={(e) => console.log(e.target.value)}
 
           />
         </Space>

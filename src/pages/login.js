@@ -1,43 +1,44 @@
 import { Button, Card, Divider, Form, Input, Space } from 'antd'
 import Meta from 'antd/es/card/Meta'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Cookies from 'js-cookie';
-import ClientCaptcha from 'react-client-captcha';
+import ReactCaptcha from 'modern-react-captcha';
 import toast, { Toaster } from 'react-hot-toast';
 import { useNavigate } from "react-router-dom";
 import styles from './login.module.scss'
 import Title from 'antd/es/typography/Title';
-
 const Login = () => {
     const [captcha, setCaptcha] = useState();
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         fetch('https://deploy-mern-api.vercel.app/register')
-    //         .then(res => res.json())
-    //         .then((e)=>{console.log(e)});
-    //     }
-    //     fetchData();
-    //   });
+
+
+    useEffect(()=>{
+        generateRandomNumber();
+    },[])
 
 
     const handleOnFinish = (values) => {
 
-        if (values?.username  && values?.password ) {
+        if (values?.username && values?.password) {
             toast.success("Logged in successfully");
             // sessionStorage.setItem("isUserLogged", true);
-            Cookies.set('isUserLogged', true, { expires: 7 }); 
+            Cookies.set('isUserLogged', true, { expires: 7 });
             navigate('/home')
         } else {
-
+            navigate('/login')
             toast.error("User name or password incorrect");
-            sessionStorage.setItem("isUserLogged", false);
         }
     };
-    console.log("data", data);
+
+    const generateRandomNumber =()=> {
+        const captcha = Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000;
+
+        return setCaptcha(captcha.toString())
+      }
+
     return (
         <div className={styles.loginWrapper}>
             <Toaster />
@@ -88,31 +89,34 @@ const Login = () => {
                             },
                         ]}
                     >
-                        <Input />
+                        <Input.Password />
                     </Form.Item>
                     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', paddingBottom: '10px' }}>
 
-                        <ClientCaptcha captchaCode={(e) => setCaptcha(e)} />
+
+                        {captcha}
+                        {/* <ClientCaptcha captchaCode={(e) => setCaptcha(e)} /> */}
+                        
                     </div>
 
                     <Form.Item
                         label="Captcha :"
                         name="captcha"
-                        // rules={[
-                        //     {
-                        //         required: true,
-                        //         message: 'Please enter Captcha'
-                        //     }, (e) => ({
-                        //         validator(_, value) {
-                        //             if (value !== captcha) {
-                        //                 return Promise.reject(new Error('Captcha not match!'));
-                        //             }
-                        //             return Promise.resolve();
-                        //         }
-                        //     })
-                        // ]}
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please enter Captcha'
+                            }, (e) => ({
+                                validator(_, value) {
+                                    if (value !== captcha) {
+                                        return Promise.reject();
+                                    }
+                                    return Promise.resolve();
+                                }
+                            })
+                        ]}
                     >
-                        <Input />
+                        <Input type='number'/>
                     </Form.Item>
                     <Form.Item label="" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                         <Space>
@@ -120,7 +124,7 @@ const Login = () => {
                             <Button type="" htmlType="reset">
                                 Clear
                             </Button>
-                            <Button type="primary" htmlType="submit" loading={false}>
+                            <Button type="primary" htmlType='submit' loading={false}>
                                 Submit
                             </Button>
                         </Space>

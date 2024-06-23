@@ -14,7 +14,6 @@ export const CreateForm = () => {
             values['clientId'] = id
         }
 
-        console.log(values);
         toast.success("Data created");
         form.resetFields();
     };
