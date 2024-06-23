@@ -1,4 +1,4 @@
-import { Button, Card, Divider, Form, Input, Space } from 'antd'
+import { Button, Card, Col, Divider, Form, Input, Row, Space } from 'antd'
 import Meta from 'antd/es/card/Meta'
 import React, { useEffect, useState } from 'react'
 import Cookies from 'js-cookie';
@@ -7,6 +7,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import { useNavigate } from "react-router-dom";
 import styles from './login.module.scss'
 import Title from 'antd/es/typography/Title';
+import { GPaySVG } from '../packages/icons/gpay';
 const Login = () => {
     const [captcha, setCaptcha] = useState();
     const [data, setData] = useState(null);
@@ -15,9 +16,9 @@ const Login = () => {
 
 
 
-    useEffect(()=>{
+    useEffect(() => {
         generateRandomNumber();
-    },[])
+    }, [])
 
 
     const handleOnFinish = (values) => {
@@ -33,11 +34,11 @@ const Login = () => {
         }
     };
 
-    const generateRandomNumber =()=> {
+    const generateRandomNumber = () => {
         const captcha = Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000;
 
         return setCaptcha(captcha.toString())
-      }
+    }
 
     return (
         <div className={styles.loginWrapper}>
@@ -48,7 +49,7 @@ const Login = () => {
                     width: 440,
                 }}
             >
-                <Title style={{ textAlign: 'center' }}>Kerala</Title>
+                <Title level={6} style={{ textAlign: 'center' }}>Kerala</Title>
                 <Meta title="Please login to continue" style={{ textAlign: 'center' }} />
                 <Divider />
                 <Form onFinish={handleOnFinish}
@@ -91,12 +92,16 @@ const Login = () => {
                     >
                         <Input.Password />
                     </Form.Item>
-                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', paddingBottom: '10px' }}>
+                    <div className={styles.captchaWrapper}>
+                        <Row>
+                            <Col span={12} offset={10}>
+                                <span className={styles.captcha}>{captcha}</span>
+                                <span className={styles.captchaResetIcon} onClick={generateRandomNumber} >
+                                    <GPaySVG width={20} height={20} />
+                                </span>
+                            </Col>
+                        </Row>
 
-
-                        {captcha}
-                        {/* <ClientCaptcha captchaCode={(e) => setCaptcha(e)} /> */}
-                        
                     </div>
 
                     <Form.Item
@@ -116,7 +121,7 @@ const Login = () => {
                             })
                         ]}
                     >
-                        <Input type='number'/>
+                        <Input type='number' />
                     </Form.Item>
                     <Form.Item label="" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                         <Space>

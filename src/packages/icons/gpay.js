@@ -1,12 +1,13 @@
 import React from 'react'
 
 export const GPaySVG = (props) => {
+  const {width, height} = props
     return (
         <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 103.964 103.908"
-        width={256}
-        height={256}
+        width={width}
+        height={height}
         {...props}
       >
         <g data-name="google pay">

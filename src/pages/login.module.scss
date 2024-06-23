@@ -2,6 +2,28 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height:100vh;
+    height: 100vh;
     background-image: url('https://images.unsplash.com/photo-1591420699297-88e82958f324?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    user-select: none;
+
+    .captchaWrapper {
+        padding-bottom: 20px;
+    }
+
+    .captcha {
+        height: 20px;
+        padding: 5px 20px 5px 20px;
+        border-radius: 5px;
+        background-color: #F5F5F5;
+        vertical-align: middle;
+        font-size: large;
+        user-select: none;
+    }
+
+    .captchaResetIcon {
+        padding-left: 10px;
+        vertical-align: bottom;
+    }
+
+
 }
