@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable */
+import React, { useEffect } from 'react';
 import { Avatar, ConfigProvider, Flex, Grid, Layout, Menu, Typography, theme } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import styles from './home.module.scss';
@@ -32,7 +33,9 @@ const Home = () => {
         token: { colorBgContainer, borderRadiusLG },
     } = theme.useToken();
 
-
+    useEffect(() => {
+        navigate('/home')
+    }, [])
 
     const handleLogout = () => {
         localStorage.clear('isUserLogged');

@@ -15,7 +15,10 @@ import { useState } from 'react';
 
 
 function App() {
-  const [auth] = useState( localStorage.getItem(`isUserLogged`));
+  // const [auth] = useState( localStorage.getItem(`isUserLogged`));
+  const [auth] = useState(
+    JSON.parse(localStorage.getItem(`isUserLogged`) || '[]' )
+  );
   console.log(auth);
   return (
     <BrowserRouter>
